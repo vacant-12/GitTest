@@ -1,8 +1,7 @@
 package com.hogwartsmini.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.hogwartsmini.demo.common.ResultDto;
-import com.hogwartsmini.demo.common.ServiceException;
+import com.hogwartsmini.demo.common.*;
 import com.hogwartsmini.demo.dao.AddHogwartsTestUserDto;
 import com.hogwartsmini.demo.dao.UpdateHogwartsTestUserDto;
 import com.hogwartsmini.demo.dto.BuildDto;
@@ -20,6 +19,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import tk.mybatis.mapper.util.StringUtil;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -29,6 +29,8 @@ import java.util.List;
 @RequestMapping("hogwarts")
 @Slf4j    //打出异常日志，这里有点问题
 public class HogwartsTestUserController {
+    @Autowired
+    private TokenDb tokenDb;
 
     @Autowired
     public HogwartsTestUserService hogwartsTestUserService;
@@ -38,21 +40,20 @@ public class HogwartsTestUserController {
 
     @ApiOperation(value = "登录接口")
     @PostMapping("login")
-    public ResultDto<UserDto> login(@RequestBody UserDto userDto){
-        String result = hogwartsTestUserService.login(userDto);
+    public ResultDto<HogwartsToken> login(@RequestBody UserDto userDto){
+        return hogwartsTestUserService.login(userDto);
 
         //抛出异常
 
-            if(userDto.getName().contains("error2")){
+/*            if(userDto.getName().contains("error2")){
                 throw new  NullPointerException();
             }
             if(userDto.getName().contains("error")){
                 ServiceException.throwEx("用户名中含有error");
             }
 
+            return ResultDto.success("成功 " + result + "  hogwartsKey1 = " + hogwartsKey1,userDto);*/
 
-            return ResultDto.success("成功 " + result + "  hogwartsKey1 = " + hogwartsKey1,userDto);
-        //return "成功 " + result + "  hogwartsKey1 = " + hogwartsKey1;
     }
 
     @ApiOperation("注册接口")
@@ -121,6 +122,14 @@ public class HogwartsTestUserController {
 
         log.info("用户信息删除 id= " + JSONObject.toJSONString(userId));
         return hogwartsTestUserService.delete(userId);
+    }
+
+    @GetMapping("isLogin")
+    public ResultDto isLogin(HttpServletRequest request){
+        String tokenStr = request.getHeader(UserBaseStr.LOGIN_TOKEN);
+        TokenDto tokenDto = tokenDb.getTokenDto(tokenStr);
+
+        return ResultDto.success("成功",tokenDto);
     }
 
     @ApiOperation("调用Jenkins构建job")

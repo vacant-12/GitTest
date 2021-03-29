@@ -10,12 +10,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 @ResponseBody
-//异常处理类
+@Slf4j
 
 public class GlobalExceptionHandler {
-    ErrorManager log = new ErrorManager();
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    //@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler({ServiceException.class})
     public ResultDto serviceExceptionHandler(ServiceException se){
         log.error(se.getMessage());

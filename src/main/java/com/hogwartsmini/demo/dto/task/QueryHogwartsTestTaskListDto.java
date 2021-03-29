@@ -1,4 +1,4 @@
-package com.hogwartsmini.demo.dto.jenkins;
+package com.hogwartsmini.demo.dto.task;
 
 import com.hogwartsmini.demo.dto.BaseDto;
 import io.swagger.annotations.ApiModel;
@@ -10,9 +10,9 @@ import lombok.Data;
  * @Date 2020/6/15 11:42
  **/
 
-@ApiModel(value="查询Jenkins信息列表对象")
+@ApiModel(value="查询任务信息列表对象")
 @Data
-public class QueryHogwartsTestJenkinsListDto extends BaseDto {
+public class QueryHogwartsTestTaskListDto extends BaseDto {
 
     @ApiModelProperty(value="Jenkins名称")
     private String name;

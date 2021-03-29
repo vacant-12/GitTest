@@ -13,6 +13,6 @@ public class BuildDto {
     private String userId;
     @ApiModelProperty(value ="remark",example = "String&Number",required = true)
     private String remark;
-    @ApiModelProperty(value ="testCommand",example = "pwsd",required = true)
+    @ApiModelProperty(value ="testCommand",example = "pwd",required = true)
     private String testCommand;
 }

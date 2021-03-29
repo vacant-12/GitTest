@@ -20,7 +20,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Override   //标注继承父类的方法
     protected void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(demoInterceptor).addPathPatterns("/**")
-        .excludePathPatterns("/hogwarts/login")
+        //.excludePathPatterns("/hogwarts/login")
                 ;
     }
 

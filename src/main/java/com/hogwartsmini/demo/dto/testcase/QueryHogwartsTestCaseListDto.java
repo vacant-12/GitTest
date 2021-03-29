@@ -1,4 +1,4 @@
-package com.hogwartsmini.demo.dto.jenkins;
+package com.hogwartsmini.demo.dto.testcase;
 
 import com.hogwartsmini.demo.dto.BaseDto;
 import io.swagger.annotations.ApiModel;
@@ -10,14 +10,16 @@ import lombok.Data;
  * @Date 2020/6/15 11:42
  **/
 
-@ApiModel(value="查询Jenkins信息列表对象")
+@ApiModel(value="查询测试用例信息列表对象")
 @Data
-public class QueryHogwartsTestJenkinsListDto extends BaseDto {
+public class QueryHogwartsTestCaseListDto extends BaseDto {
 
-    @ApiModelProperty(value="Jenkins名称")
-    private String name;
+    @ApiModelProperty(value="测试用例名称")
+    private String caseName;
 
     @ApiModelProperty(value="创建者id(客户端传值无效，以token数据为准)")
     private Integer createUserId;
+
+
 
 }
